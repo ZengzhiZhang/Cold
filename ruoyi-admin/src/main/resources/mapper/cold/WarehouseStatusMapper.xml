@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.cold.mapper.WarehouseStatusMapper">
+
+    <resultMap type="WarehouseStatus" id="WarehouseStatusResult">
+        <result property="warehouseId"    column="warehouse_id"    />
+        <result property="category"    column="category"    />
+        <result property="wareNumber"    column="ware_number"    />
+        <result property="inventory"    column="inventory"    />
+        <result property="unit"    column="unit"    />
+        <result property="remark"    column="remark"    />
+        <result property="clientId"    column="client_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectWarehouseStatusVo">
+        select warehouse_id, category, ware_number, inventory, unit, remark, client_id, create_time, update_time from warehouse_status
+    </sql>
+
+    <select id="selectWarehouseStatusList" parameterType="WarehouseStatus" resultMap="WarehouseStatusResult">
+        <include refid="selectWarehouseStatusVo"/>
+        <where>
+            <if test="category != null  and category != ''"> and category = #{category}</if>
+            <if test="wareNumber != null "> and ware_number = #{wareNumber}</if>
+            <if test="inventory != null "> and inventory = #{inventory}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="clientId != null "> and client_id = #{clientId}</if>
+        </where>
+    </select>
+
+    <select id="selectWarehouseStatusByWarehouseId" parameterType="Long" resultMap="WarehouseStatusResult">
+        <include refid="selectWarehouseStatusVo"/>
+        where warehouse_id = #{warehouseId}
+    </select>
+
+    <insert id="insertWarehouseStatus" parameterType="WarehouseStatus" useGeneratedKeys="true" keyProperty="warehouseId">
+        insert into warehouse_status
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="category != null and category != ''">category,</if>
+            <if test="wareNumber != null">ware_number,</if>
+            <if test="inventory != null">inventory,</if>
+            <if test="unit != null and unit != ''">unit,</if>
+            <if test="remark != null">remark,</if>
+            <if test="clientId != null">client_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="category != null and category != ''">#{category},</if>
+            <if test="wareNumber != null">#{wareNumber},</if>
+            <if test="inventory != null">#{inventory},</if>
+            <if test="unit != null and unit != ''">#{unit},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="clientId != null">#{clientId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateWarehouseStatus" parameterType="WarehouseStatus">
+        update warehouse_status
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="category != null and category != ''">category = #{category},</if>
+            <if test="wareNumber != null">ware_number = #{wareNumber},</if>
+            <if test="inventory != null">inventory = #{inventory},</if>
+            <if test="unit != null and unit != ''">unit = #{unit},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="clientId != null">client_id = #{clientId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where warehouse_id = #{warehouseId}
+    </update>
+
+    <delete id="deleteWarehouseStatusByWarehouseId" parameterType="Long">
+        delete from warehouse_status where warehouse_id = #{warehouseId}
+    </delete>
+
+    <delete id="deleteWarehouseStatusByWarehouseIds" parameterType="String">
+        delete from warehouse_status where warehouse_id in
+        <foreach item="warehouseId" collection="array" open="(" separator="," close=")">
+            #{warehouseId}
+        </foreach>
+    </delete>
+</mapper>
