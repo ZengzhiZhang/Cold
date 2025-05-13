@@ -2,6 +2,10 @@ package com.ruoyi.cold.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.cold.domain.WarehouseIn;
+import com.ruoyi.cold.domain.WarehouseInWName;
+import com.ruoyi.cold.domain.WarehouseOutWName;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +38,14 @@ public class WarehouseOutController extends BaseController
     @Autowired
     private IWarehouseOutService warehouseOutService;
 
+    @PreAuthorize("@ss.hasPermi('cold:warehouse_in:list')")
+    @GetMapping("/listWName")
+    public TableDataInfo listWName(WarehouseOut warehouseOut)
+    {
+        startPage();
+        List<WarehouseOutWName> list = warehouseOutService.selectWarehouseInWNameList(warehouseOut);
+        return getDataTable(list);
+    }
     /**
      * 查询出库列表
      */

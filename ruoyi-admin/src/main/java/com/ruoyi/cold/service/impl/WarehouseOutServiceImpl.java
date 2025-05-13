@@ -1,6 +1,11 @@
 package com.ruoyi.cold.service.impl;
 
+import java.util.Collections;
 import java.util.List;
+
+import com.ruoyi.cold.domain.WarehouseIn;
+import com.ruoyi.cold.domain.WarehouseInWName;
+import com.ruoyi.cold.domain.WarehouseOutWName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.cold.mapper.WarehouseOutMapper;
@@ -89,5 +94,12 @@ public class WarehouseOutServiceImpl implements IWarehouseOutService
     public int deleteWarehouseOutByWarehouseOutId(Integer warehouseOutId)
     {
         return warehouseOutMapper.deleteWarehouseOutByWarehouseOutId(warehouseOutId);
+    }
+
+    @Override
+    public List<WarehouseOutWName> selectWarehouseInWNameList(WarehouseOut warehouseOut) {
+
+            return warehouseOutMapper.selectWarehouseOutWNameList(warehouseOut);
+
     }
 }

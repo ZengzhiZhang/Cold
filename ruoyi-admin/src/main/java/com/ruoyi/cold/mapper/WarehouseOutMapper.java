@@ -1,7 +1,11 @@
 package com.ruoyi.cold.mapper;
 
 import java.util.List;
+
+import com.ruoyi.cold.domain.WarehouseIn;
+import com.ruoyi.cold.domain.WarehouseInWName;
 import com.ruoyi.cold.domain.WarehouseOut;
+import com.ruoyi.cold.domain.WarehouseOutWName;
 
 /**
  * 出库Mapper接口
@@ -11,6 +15,8 @@ import com.ruoyi.cold.domain.WarehouseOut;
  */
 public interface WarehouseOutMapper 
 {
+
+    public List<WarehouseOutWName> selectWarehouseOutWNameList(WarehouseOut warehouseOut);
     /**
      * 查询出库
      * 

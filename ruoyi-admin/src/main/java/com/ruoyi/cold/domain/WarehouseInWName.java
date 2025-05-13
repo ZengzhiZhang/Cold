@@ -14,10 +14,11 @@ public class WarehouseInWName extends BaseEntity {
     /** 入库操作ID */
     private Integer warehouseInId;
 
+    @Excel(name = "客户姓名")
     private String warehouseInClientName;
 
     /** 客户 */
-    @Excel(name = "客户")
+    @Excel(name = "客户编号")
     private Integer warehouseInClient;
 
     /** 品类 */

@@ -1,7 +1,11 @@
 package com.ruoyi.cold.service;
 
 import java.util.List;
+
+import com.ruoyi.cold.domain.WarehouseIn;
+import com.ruoyi.cold.domain.WarehouseInWName;
 import com.ruoyi.cold.domain.WarehouseOut;
+import com.ruoyi.cold.domain.WarehouseOutWName;
 
 /**
  * 出库Service接口
@@ -58,4 +62,6 @@ public interface IWarehouseOutService
      * @return 结果
      */
     public int deleteWarehouseOutByWarehouseOutId(Integer warehouseOutId);
+
+    List<WarehouseOutWName> selectWarehouseInWNameList(WarehouseOut warehouseOut);
 }

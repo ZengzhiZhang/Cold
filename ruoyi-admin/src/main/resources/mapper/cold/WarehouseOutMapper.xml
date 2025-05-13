@@ -15,9 +15,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="warehouseOutManner"    column="warehouse_out_manner"    />
     </resultMap>
 
+    <resultMap type="WarehouseOutWName" id="WarehouseOutWNameResult">
+        <result property="warehouseOutId"    column="warehouse_out_id"    />
+        <result property="warehouseOutClientId"    column="warehouse_out_client_id"    />
+        <result property="warehouseOutClientName" column="client_info_name"/>
+        <result property="warehouseOutCategory"    column="warehouse_out_category"    />
+        <result property="warehouseOutNumber"    column="warehouse_out_number"    />
+        <result property="warehouseOutQuantity"    column="warehouse_out_quantity"    />
+        <result property="warehouseOutTime"    column="warehouse_out_time"    />
+        <result property="warehouseOutMoney"    column="warehouse_out_money"    />
+        <result property="warehouseOutManner"    column="warehouse_out_manner"    />
+    </resultMap>
+
+    <sql id="selectWarehouseOutWNameVo">
+        select w.*,c.client_info_name from warehouse_out w left join client_info c on w.warehouse_out_client_id = c.client_info_id
+    </sql>
+
     <sql id="selectWarehouseOutVo">
         select warehouse_out_id, warehouse_out_client_id, warehouse_out_category, warehouse_out_number, warehouse_out_quantity, warehouse_out_time, warehouse_out_money, warehouse_out_manner from warehouse_out
     </sql>
+
+    <select id="selectWarehouseOutWNameList" parameterType="WarehouseOut" resultMap="WarehouseOutWNameResult">
+        <include refid="selectWarehouseOutWNameVo"/>
+        <where>
+            <if test="warehouseOutClientId != null "> and warehouse_out_client_id = #{warehouseOutClientId}</if>
+            <if test="warehouseOutCategory != null  and warehouseOutCategory != ''"> and warehouse_out_category = #{warehouseOutCategory}</if>
+            <if test="warehouseOutNumber != null "> and warehouse_out_number = #{warehouseOutNumber}</if>
+            <if test="warehouseOutQuantity != null "> and warehouse_out_quantity = #{warehouseOutQuantity}</if>
+            <if test="warehouseOutTime != null "> and warehouse_out_time = #{warehouseOutTime}</if>
+            <if test="warehouseOutMoney != null "> and warehouse_out_money = #{warehouseOutMoney}</if>
+            <if test="warehouseOutManner != null "> and warehouse_out_manner = #{warehouseOutManner}</if>
+        </where>
+    </select>
 
     <select id="selectWarehouseOutList" parameterType="WarehouseOut" resultMap="WarehouseOutResult">
         <include refid="selectWarehouseOutVo"/>
@@ -36,6 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectWarehouseOutVo"/>
         where warehouse_out_id = #{warehouseOutId}
     </select>
+
 
     <insert id="insertWarehouseOut" parameterType="WarehouseOut" useGeneratedKeys="true" keyProperty="warehouseOutId">
         insert into warehouse_out
