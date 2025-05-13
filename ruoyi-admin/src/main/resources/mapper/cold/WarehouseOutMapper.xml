@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.cold.mapper.WarehouseOutMapper">
+    
+    <resultMap type="WarehouseOut" id="WarehouseOutResult">
+        <result property="warehouseOutId"    column="warehouse_out_id"    />
+        <result property="warehouseOutClientId"    column="warehouse_out_client_id"    />
+        <result property="warehouseOutCategory"    column="warehouse_out_category"    />
+        <result property="warehouseOutNumber"    column="warehouse_out_number"    />
+        <result property="warehouseOutQuantity"    column="warehouse_out_quantity"    />
+        <result property="warehouseOutTime"    column="warehouse_out_time"    />
+        <result property="warehouseOutMoney"    column="warehouse_out_money"    />
+        <result property="warehouseOutManner"    column="warehouse_out_manner"    />
+    </resultMap>
+
+    <sql id="selectWarehouseOutVo">
+        select warehouse_out_id, warehouse_out_client_id, warehouse_out_category, warehouse_out_number, warehouse_out_quantity, warehouse_out_time, warehouse_out_money, warehouse_out_manner from warehouse_out
+    </sql>
+
+    <select id="selectWarehouseOutList" parameterType="WarehouseOut" resultMap="WarehouseOutResult">
+        <include refid="selectWarehouseOutVo"/>
+        <where>  
+            <if test="warehouseOutClientId != null "> and warehouse_out_client_id = #{warehouseOutClientId}</if>
+            <if test="warehouseOutCategory != null  and warehouseOutCategory != ''"> and warehouse_out_category = #{warehouseOutCategory}</if>
+            <if test="warehouseOutNumber != null "> and warehouse_out_number = #{warehouseOutNumber}</if>
+            <if test="warehouseOutQuantity != null "> and warehouse_out_quantity = #{warehouseOutQuantity}</if>
+            <if test="warehouseOutTime != null "> and warehouse_out_time = #{warehouseOutTime}</if>
+            <if test="warehouseOutMoney != null "> and warehouse_out_money = #{warehouseOutMoney}</if>
+            <if test="warehouseOutManner != null "> and warehouse_out_manner = #{warehouseOutManner}</if>
+        </where>
+    </select>
+    
+    <select id="selectWarehouseOutByWarehouseOutId" parameterType="Integer" resultMap="WarehouseOutResult">
+        <include refid="selectWarehouseOutVo"/>
+        where warehouse_out_id = #{warehouseOutId}
+    </select>
+
+    <insert id="insertWarehouseOut" parameterType="WarehouseOut" useGeneratedKeys="true" keyProperty="warehouseOutId">
+        insert into warehouse_out
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="warehouseOutClientId != null">warehouse_out_client_id,</if>
+            <if test="warehouseOutCategory != null and warehouseOutCategory != ''">warehouse_out_category,</if>
+            <if test="warehouseOutNumber != null">warehouse_out_number,</if>
+            <if test="warehouseOutQuantity != null">warehouse_out_quantity,</if>
+            <if test="warehouseOutTime != null">warehouse_out_time,</if>
+            <if test="warehouseOutMoney != null">warehouse_out_money,</if>
+            <if test="warehouseOutManner != null">warehouse_out_manner,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="warehouseOutClientId != null">#{warehouseOutClientId},</if>
+            <if test="warehouseOutCategory != null and warehouseOutCategory != ''">#{warehouseOutCategory},</if>
+            <if test="warehouseOutNumber != null">#{warehouseOutNumber},</if>
+            <if test="warehouseOutQuantity != null">#{warehouseOutQuantity},</if>
+            <if test="warehouseOutTime != null">#{warehouseOutTime},</if>
+            <if test="warehouseOutMoney != null">#{warehouseOutMoney},</if>
+            <if test="warehouseOutManner != null">#{warehouseOutManner},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWarehouseOut" parameterType="WarehouseOut">
+        update warehouse_out
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="warehouseOutClientId != null">warehouse_out_client_id = #{warehouseOutClientId},</if>
+            <if test="warehouseOutCategory != null and warehouseOutCategory != ''">warehouse_out_category = #{warehouseOutCategory},</if>
+            <if test="warehouseOutNumber != null">warehouse_out_number = #{warehouseOutNumber},</if>
+            <if test="warehouseOutQuantity != null">warehouse_out_quantity = #{warehouseOutQuantity},</if>
+            <if test="warehouseOutTime != null">warehouse_out_time = #{warehouseOutTime},</if>
+            <if test="warehouseOutMoney != null">warehouse_out_money = #{warehouseOutMoney},</if>
+            <if test="warehouseOutManner != null">warehouse_out_manner = #{warehouseOutManner},</if>
+        </trim>
+        where warehouse_out_id = #{warehouseOutId}
+    </update>
+
+    <delete id="deleteWarehouseOutByWarehouseOutId" parameterType="Integer">
+        delete from warehouse_out where warehouse_out_id = #{warehouseOutId}
+    </delete>
+
+    <delete id="deleteWarehouseOutByWarehouseOutIds" parameterType="String">
+        delete from warehouse_out where warehouse_out_id in 
+        <foreach item="warehouseOutId" collection="array" open="(" separator="," close=")">
+            #{warehouseOutId}
+        </foreach>
+    </delete>
+</mapper>

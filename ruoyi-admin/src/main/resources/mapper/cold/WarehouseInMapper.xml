@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.cold.mapper.WarehouseInMapper">
+    
+    <resultMap type="WarehouseIn" id="WarehouseInResult">
+        <result property="warehouseInId"    column="warehouse_in_id"    />
+        <result property="warehouseInClient"    column="warehouse_in_client"    />
+        <result property="warehouseInCategory"    column="warehouse_in_category"    />
+        <result property="warehouseInQuantity"    column="warehouse_in_quantity"    />
+        <result property="warehouseInUnit"    column="warehouse_in_unit"    />
+        <result property="warehouseInPrice"    column="warehouse_in_price"    />
+        <result property="warehouseInNumber"    column="warehouse_in_number"    />
+        <result property="warehouseInTime"    column="warehouse_in_time"    />
+        <result property="warehouseInSettle"    column="warehouse_in_settle"    />
+        <result property="warehouseInFinish"    column="warehouse_in_finish"    />
+    </resultMap>
+
+    <resultMap type="WarehouseInWName" id="WarehouseInWNameResult">
+        <result property="warehouseInId"    column="warehouse_in_id"    />
+        <result property="warehouseInClientName" column="client_info_name"/>
+        <result property="warehouseInClient"    column="warehouse_in_client"    />
+        <result property="warehouseInCategory"    column="warehouse_in_category"    />
+        <result property="warehouseInQuantity"    column="warehouse_in_quantity"    />
+        <result property="warehouseInUnit"    column="warehouse_in_unit"    />
+        <result property="warehouseInPrice"    column="warehouse_in_price"    />
+        <result property="warehouseInNumber"    column="warehouse_in_number"    />
+        <result property="warehouseInTime"    column="warehouse_in_time"    />
+        <result property="warehouseInSettle"    column="warehouse_in_settle"    />
+        <result property="warehouseInFinish"    column="warehouse_in_finish"    />
+    </resultMap>
+
+    <sql id="selectWarehouseInVo">
+        select warehouse_in_id, warehouse_in_client, warehouse_in_category, warehouse_in_quantity, warehouse_in_unit, warehouse_in_price, warehouse_in_number, warehouse_in_time, warehouse_in_settle, warehouse_in_finish from warehouse_in
+    </sql>
+
+
+
+    <select id="selectWarehouseInList" parameterType="WarehouseIn" resultMap="WarehouseInResult">
+        <include refid="selectWarehouseInVo"/>
+        <where>  
+            <if test="warehouseInClient != null "> and warehouse_in_client = #{warehouseInClient}</if>
+            <if test="warehouseInCategory != null  and warehouseInCategory != ''"> and warehouse_in_category = #{warehouseInCategory}</if>
+            <if test="warehouseInQuantity != null "> and warehouse_in_quantity = #{warehouseInQuantity}</if>
+            <if test="warehouseInUnit != null  and warehouseInUnit != ''"> and warehouse_in_unit = #{warehouseInUnit}</if>
+            <if test="warehouseInPrice != null "> and warehouse_in_price = #{warehouseInPrice}</if>
+            <if test="warehouseInNumber != null "> and warehouse_in_number = #{warehouseInNumber}</if>
+            <if test="warehouseInTime != null "> and warehouse_in_time = #{warehouseInTime}</if>
+            <if test="warehouseInSettle != null "> and warehouse_in_settle = #{warehouseInSettle}</if>
+            <if test="warehouseInFinish != null "> and warehouse_in_finish = #{warehouseInFinish}</if>
+        </where>
+    </select>
+
+
+    <sql id="selectWarehouseInWNameVo">
+        select w.*,c.client_info_name from warehouse_in w left join client_info c on w.warehouse_in_client = c.client_info_id
+    </sql>
+    <select id="selectWarehouseInWNameList" parameterType="WarehouseIn" resultMap="WarehouseInWNameResult">
+        <include refid="selectWarehouseInWNameVo"/>
+        <where>
+            <if test="warehouseInClient != null "> and warehouse_in_client = #{warehouseInClient}</if>
+            <if test="warehouseInCategory != null  and warehouseInCategory != ''"> and warehouse_in_category = #{warehouseInCategory}</if>
+            <if test="warehouseInQuantity != null "> and warehouse_in_quantity = #{warehouseInQuantity}</if>
+            <if test="warehouseInUnit != null  and warehouseInUnit != ''"> and warehouse_in_unit = #{warehouseInUnit}</if>
+            <if test="warehouseInPrice != null "> and warehouse_in_price = #{warehouseInPrice}</if>
+            <if test="warehouseInNumber != null "> and warehouse_in_number = #{warehouseInNumber}</if>
+            <if test="warehouseInTime != null "> and warehouse_in_time = #{warehouseInTime}</if>
+            <if test="warehouseInSettle != null "> and warehouse_in_settle = #{warehouseInSettle}</if>
+            <if test="warehouseInFinish != null "> and warehouse_in_finish = #{warehouseInFinish}</if>
+        </where>
+    </select>
+    
+    <select id="selectWarehouseInByWarehouseInId" parameterType="Integer" resultMap="WarehouseInResult">
+        <include refid="selectWarehouseInVo"/>
+        where warehouse_in_id = #{warehouseInId}
+    </select>
+
+    <insert id="insertWarehouseIn" parameterType="WarehouseIn" useGeneratedKeys="true" keyProperty="warehouseInId">
+        insert into warehouse_in
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="warehouseInClient != null">warehouse_in_client,</if>
+            <if test="warehouseInCategory != null and warehouseInCategory != ''">warehouse_in_category,</if>
+            <if test="warehouseInQuantity != null">warehouse_in_quantity,</if>
+            <if test="warehouseInUnit != null and warehouseInUnit != ''">warehouse_in_unit,</if>
+            <if test="warehouseInPrice != null">warehouse_in_price,</if>
+            <if test="warehouseInNumber != null">warehouse_in_number,</if>
+            <if test="warehouseInTime != null">warehouse_in_time,</if>
+            <if test="warehouseInSettle != null">warehouse_in_settle,</if>
+            <if test="warehouseInFinish != null">warehouse_in_finish,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="warehouseInClient != null">#{warehouseInClient},</if>
+            <if test="warehouseInCategory != null and warehouseInCategory != ''">#{warehouseInCategory},</if>
+            <if test="warehouseInQuantity != null">#{warehouseInQuantity},</if>
+            <if test="warehouseInUnit != null and warehouseInUnit != ''">#{warehouseInUnit},</if>
+            <if test="warehouseInPrice != null">#{warehouseInPrice},</if>
+            <if test="warehouseInNumber != null">#{warehouseInNumber},</if>
+            <if test="warehouseInTime != null">#{warehouseInTime},</if>
+            <if test="warehouseInSettle != null">#{warehouseInSettle},</if>
+            <if test="warehouseInFinish != null">#{warehouseInFinish},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWarehouseIn" parameterType="WarehouseIn">
+        update warehouse_in
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="warehouseInClient != null">warehouse_in_client = #{warehouseInClient},</if>
+            <if test="warehouseInCategory != null and warehouseInCategory != ''">warehouse_in_category = #{warehouseInCategory},</if>
+            <if test="warehouseInQuantity != null">warehouse_in_quantity = #{warehouseInQuantity},</if>
+            <if test="warehouseInUnit != null and warehouseInUnit != ''">warehouse_in_unit = #{warehouseInUnit},</if>
+            <if test="warehouseInPrice != null">warehouse_in_price = #{warehouseInPrice},</if>
+            <if test="warehouseInNumber != null">warehouse_in_number = #{warehouseInNumber},</if>
+            <if test="warehouseInTime != null">warehouse_in_time = #{warehouseInTime},</if>
+            <if test="warehouseInSettle != null">warehouse_in_settle = #{warehouseInSettle},</if>
+            <if test="warehouseInFinish != null">warehouse_in_finish = #{warehouseInFinish},</if>
+        </trim>
+        where warehouse_in_id = #{warehouseInId}
+    </update>
+
+    <delete id="deleteWarehouseInByWarehouseInId" parameterType="Integer">
+        delete from warehouse_in where warehouse_in_id = #{warehouseInId}
+    </delete>
+
+    <delete id="deleteWarehouseInByWarehouseInIds" parameterType="String">
+        delete from warehouse_in where warehouse_in_id in 
+        <foreach item="warehouseInId" collection="array" open="(" separator="," close=")">
+            #{warehouseInId}
+        </foreach>
+    </delete>
+</mapper>
