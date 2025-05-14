@@ -24,6 +24,11 @@ public class WarehouseInServiceImpl implements IWarehouseInService
 
 
     @Override
+    public List<Integer> selectUnfinishByClientId(WarehouseIn warehouseIn) {
+        return warehouseInMapper.selectUnfinishByClientId(warehouseIn);
+    }
+
+    @Override
     public List<WarehouseInWName> selectWarehouseInWNameList(WarehouseIn warehouseIn) {
         return warehouseInMapper.selectWarehouseInWNameList(warehouseIn);
     }
@@ -98,5 +103,10 @@ public class WarehouseInServiceImpl implements IWarehouseInService
     public int deleteWarehouseInByWarehouseInId(Integer warehouseInId)
     {
         return warehouseInMapper.deleteWarehouseInByWarehouseInId(warehouseInId);
+    }
+
+    @Override
+    public int updateWarehouseInFinishByIds(List<Integer> warehouseInIds) {
+        return warehouseInMapper.updateWarehouseInFinishByIds(warehouseInIds);
     }
 }

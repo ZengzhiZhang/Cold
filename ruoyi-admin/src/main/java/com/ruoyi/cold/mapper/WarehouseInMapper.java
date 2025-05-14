@@ -61,4 +61,8 @@ public interface WarehouseInMapper
      * @return 结果
      */
     public int deleteWarehouseInByWarehouseInIds(Integer[] warehouseInIds);
+
+    List<Integer> selectUnfinishByClientId(WarehouseIn warehouseIn);
+
+    int updateWarehouseInFinishByIds(List<Integer> warehouseInIds);
 }

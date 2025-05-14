@@ -75,6 +75,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectWarehouseInVo"/>
         where warehouse_in_id = #{warehouseInId}
     </select>
+    <select id="selectUnfinishByClientId" resultType="java.lang.Integer" parameterType="WarehouseIn">
+        select warehouse_in.warehouse_in_id from  warehouse_in where warehouse_in_client = #{warehouseInClient} and warehouse_in_category = #{warehouseInCategory} and warehouse_in_finish = 0;
+    </select>
 
     <insert id="insertWarehouseIn" parameterType="WarehouseIn" useGeneratedKeys="true" keyProperty="warehouseInId">
         insert into warehouse_in
@@ -116,6 +119,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="warehouseInFinish != null">warehouse_in_finish = #{warehouseInFinish},</if>
         </trim>
         where warehouse_in_id = #{warehouseInId}
+    </update>
+    <update id="updateWarehouseInFinishByIds" parameterType="list">
+        update warehouse_in set warehouse_in_finish = 1 where warehouse_in_id in
+        <foreach item="warehouseInId" collection="list" open="(" separator="," close=")">
+            #{warehouseInId}
+        </foreach>
     </update>
 
     <delete id="deleteWarehouseInByWarehouseInId" parameterType="Integer">

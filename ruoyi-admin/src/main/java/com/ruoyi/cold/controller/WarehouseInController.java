@@ -90,7 +90,16 @@ public class WarehouseInController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody WarehouseIn warehouseIn)
     {
-        return toAjax(warehouseInService.insertWarehouseIn(warehouseIn));
+        int i = warehouseInService.insertWarehouseIn(warehouseIn);
+        if(warehouseIn.getWarehouseInFinish() == 1) {
+            //更新当前客户的所有未完成的入库为完成状态
+            List<Integer> warehouseInIds = warehouseInService.selectUnfinishByClientId(warehouseIn);
+            if(warehouseInIds.size() > 0) {
+                int update = warehouseInService.updateWarehouseInFinishByIds(warehouseInIds);
+            }
+
+        }
+        return toAjax(i);
     }
 
     /**

@@ -14,6 +14,8 @@ public interface IWarehouseInService
 {
 
 
+    public List<Integer> selectUnfinishByClientId(WarehouseIn warehouseIn);
+
     public List<WarehouseInWName> selectWarehouseInWNameList(WarehouseIn warehouseIn);
     /**
      * 查询入库
@@ -62,4 +64,6 @@ public interface IWarehouseInService
      * @return 结果
      */
     public int deleteWarehouseInByWarehouseInId(Integer warehouseInId);
+
+    int updateWarehouseInFinishByIds(List<Integer> warehouseInIds);
 }
