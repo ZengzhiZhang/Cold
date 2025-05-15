@@ -12,6 +12,8 @@ import java.util.List;
  */
 public interface IWarehouseStatusService
 {
+
+
     /**
      * 查询库存信息
      *

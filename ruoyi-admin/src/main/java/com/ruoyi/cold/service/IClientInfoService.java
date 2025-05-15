@@ -58,4 +58,6 @@ public interface IClientInfoService
      * @return 结果
      */
     public int deleteClientInfoByClientInfoId(Long clientInfoId);
+
+    List<ClientInfo> selectClientsByIds(List<Integer> clientIds);
 }

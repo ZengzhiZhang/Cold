@@ -58,4 +58,6 @@ public interface ClientInfoMapper
      * @return 结果
      */
     public int deleteClientInfoByClientInfoIds(Long[] clientInfoIds);
+
+    List<ClientInfo> selectClientsByIds(List<Integer> clientIds);
 }

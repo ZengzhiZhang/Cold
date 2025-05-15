@@ -27,6 +27,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectClientInfoVo"/>
         where client_info_id = #{clientInfoId}
     </select>
+    <select id="selectClientsByIds" resultType="com.ruoyi.cold.domain.ClientInfo">
+        select * from client_info where client_id in
+        <foreach item="clientInfoId" collection="array" open="(" separator="," close=")">
+            #{clientInfoId}
+        </foreach>
+    </select>
 
     <insert id="insertClientInfo" parameterType="ClientInfo" useGeneratedKeys="true" keyProperty="clientInfoId">
         insert into client_info

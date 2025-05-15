@@ -12,7 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="warehouseOutQuantity"    column="warehouse_out_quantity"    />
         <result property="warehouseOutTime"    column="warehouse_out_time"    />
         <result property="warehouseOutMoney"    column="warehouse_out_money"    />
+        <result property="warehouseOutUnit" column="warehouse_out_unit"/>
         <result property="warehouseOutManner"    column="warehouse_out_manner"    />
+        <result property="warehouseOutSettle" column="warehouse_out_settle"/>
     </resultMap>
 
     <resultMap type="WarehouseOutWName" id="WarehouseOutWNameResult">
@@ -22,9 +24,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="warehouseOutCategory"    column="warehouse_out_category"    />
         <result property="warehouseOutNumber"    column="warehouse_out_number"    />
         <result property="warehouseOutQuantity"    column="warehouse_out_quantity"    />
+        <result property="warehouseOutUnit" column="warehouse_out_unit"/>
         <result property="warehouseOutTime"    column="warehouse_out_time"    />
         <result property="warehouseOutMoney"    column="warehouse_out_money"    />
         <result property="warehouseOutManner"    column="warehouse_out_manner"    />
+        <result property="warehouseOutSettle" column="warehouse_out_settle"/>
+
     </resultMap>
 
     <sql id="selectWarehouseOutWNameVo">
@@ -32,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <sql id="selectWarehouseOutVo">
-        select warehouse_out_id, warehouse_out_client_id, warehouse_out_category, warehouse_out_number, warehouse_out_quantity, warehouse_out_time, warehouse_out_money, warehouse_out_manner from warehouse_out
+        select warehouse_out_id, warehouse_out_client_id, warehouse_out_category, warehouse_out_number, warehouse_out_quantity,warehouse_out_unit, warehouse_out_time, warehouse_out_money, warehouse_out_manner, warehouse_out_settle from warehouse_out
     </sql>
 
     <select id="selectWarehouseOutWNameList" parameterType="WarehouseOut" resultMap="WarehouseOutWNameResult">
@@ -45,6 +50,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="warehouseOutTime != null "> and warehouse_out_time = #{warehouseOutTime}</if>
             <if test="warehouseOutMoney != null "> and warehouse_out_money = #{warehouseOutMoney}</if>
             <if test="warehouseOutManner != null "> and warehouse_out_manner = #{warehouseOutManner}</if>
+            <if test="warehouseOutUnit != null "> and warehouse_out_unit = #{warehouseOutUnit}</if>
+
+            <if test="warehouseOutSettle != null"> and warehouse_out_settle = #{warehouseOutSettle}</if>
         </where>
     </select>
 
@@ -57,7 +65,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="warehouseOutQuantity != null "> and warehouse_out_quantity = #{warehouseOutQuantity}</if>
             <if test="warehouseOutTime != null "> and warehouse_out_time = #{warehouseOutTime}</if>
             <if test="warehouseOutMoney != null "> and warehouse_out_money = #{warehouseOutMoney}</if>
+            <if test="warehouseOutUnit != null "> and warehouse_out_unit = #{warehouseOutUnit}</if>
             <if test="warehouseOutManner != null "> and warehouse_out_manner = #{warehouseOutManner}</if>
+            <if test="warehouseOutSettle != null"> and warehouse_out_settle = #{warehouseOutSettle}</if>
         </where>
     </select>
     
@@ -76,7 +86,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="warehouseOutQuantity != null">warehouse_out_quantity,</if>
             <if test="warehouseOutTime != null">warehouse_out_time,</if>
             <if test="warehouseOutMoney != null">warehouse_out_money,</if>
+            <if test="warehouseOutUnit != null">warehouse_out_unit,</if>
             <if test="warehouseOutManner != null">warehouse_out_manner,</if>
+            <if test="warehouseOutSettle != null">warehouse_out_settle,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="warehouseOutClientId != null">#{warehouseOutClientId},</if>
@@ -85,7 +97,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="warehouseOutQuantity != null">#{warehouseOutQuantity},</if>
             <if test="warehouseOutTime != null">#{warehouseOutTime},</if>
             <if test="warehouseOutMoney != null">#{warehouseOutMoney},</if>
+            <if test="warehouseOutUnit != null">#{warehouseOutUnit},</if>
             <if test="warehouseOutManner != null">#{warehouseOutManner},</if>
+            <if test="warehouseOutSettle != null">#{warehouseOutSettle},</if>
          </trim>
     </insert>
 
@@ -98,7 +112,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="warehouseOutQuantity != null">warehouse_out_quantity = #{warehouseOutQuantity},</if>
             <if test="warehouseOutTime != null">warehouse_out_time = #{warehouseOutTime},</if>
             <if test="warehouseOutMoney != null">warehouse_out_money = #{warehouseOutMoney},</if>
+            <if test="warehouseOutUnit != null">warehouse_out_unit = #{warehouseOutUnit},</if>
             <if test="warehouseOutManner != null">warehouse_out_manner = #{warehouseOutManner},</if>
+            <if test="warehouseOutSettle != null">warehouse_out_settle = #{warehouseOutSettle}</if>
         </trim>
         where warehouse_out_id = #{warehouseOutId}
     </update>

@@ -34,6 +34,13 @@ public class ClientInfoController extends BaseController
     @Autowired
     private IClientInfoService clientInfoService;
 
+    @PreAuthorize("@ss.hasPermi('cold:client:list')")
+    @GetMapping("/listByIds")
+    public List<ClientInfo> getClientsByIds(List<Integer> clientIds) {
+        return clientInfoService.selectClientsByIds(clientIds);
+    }
+
+
     /**
      * 查询客户信息列表
      */

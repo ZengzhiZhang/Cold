@@ -1,5 +1,6 @@
 package com.ruoyi.cold.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,5 +90,10 @@ public class ClientInfoServiceImpl implements IClientInfoService
     public int deleteClientInfoByClientInfoId(Long clientInfoId)
     {
         return clientInfoMapper.deleteClientInfoByClientInfoId(clientInfoId);
+    }
+
+    @Override
+    public List<ClientInfo> selectClientsByIds(List<Integer> clientIds) {
+        return clientInfoMapper.selectClientsByIds(clientIds);
     }
 }

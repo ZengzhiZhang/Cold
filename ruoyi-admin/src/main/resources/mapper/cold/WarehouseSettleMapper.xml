@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.cold.mapper.WarehouseSettleMapper">
+    
+    <resultMap type="WarehouseSettle" id="WarehouseSettleResult">
+        <result property="warehouseSettleId"    column="warehouse_settle_id"    />
+        <result property="warehouseSettleClientId"    column="warehouse_settle_client_id"    />
+        <result property="warehouseSettleCategory"    column="warehouse_settle_category"    />
+        <result property="warehouseSettleUnit"    column="warehouse_settle_unit"    />
+        <result property="warehouseSettleQuantity"    column="warehouse_settle_quantity"    />
+        <result property="warehouseSettleMoneyKu"    column="warehouse_settle_money_ku"    />
+        <result property="warehouseSettleMoneyShou"    column="warehouse_settle_money_shou"    />
+    </resultMap>
+
+
+    <resultMap type="WarehouseSettleWName" id="WarehouseSettleResultWName">
+        <result property="warehouseSettleId"    column="warehouse_settle_id"    />
+        <result property="warehouseSettleClientId"    column="warehouse_settle_client_id"    />
+        <result property="warehouseSettleClientName" column="client_info_name"/>
+        <result property="warehouseSettleCategory"    column="warehouse_settle_category"    />
+        <result property="warehouseSettleUnit"    column="warehouse_settle_unit"    />
+        <result property="warehouseSettleQuantity"    column="warehouse_settle_quantity"    />
+        <result property="warehouseSettleMoneyKu"    column="warehouse_settle_money_ku"    />
+        <result property="warehouseSettleMoneyShou"    column="warehouse_settle_money_shou"    />
+    </resultMap>
+
+    <sql id="selectWarehouseSettleWNameVo">
+        select w.*,c.client_info_name from warehouse_settle w left join client_info c on w.warehouse_settle_client_id = c.client_info_id
+    </sql>
+    <sql id="selectWarehouseSettleVo">
+        select warehouse_settle_id, warehouse_settle_client_id, warehouse_settle_category, warehouse_settle_unit, warehouse_settle_quantity, warehouse_settle_money_ku, warehouse_settle_money_shou from warehouse_settle
+    </sql>
+
+    <select id="selectWarehouseSettleList" parameterType="WarehouseSettle" resultMap="WarehouseSettleResult">
+        <include refid="selectWarehouseSettleVo"/>
+        <where>  
+            <if test="warehouseSettleClientId != null "> and warehouse_settle_client_id = #{warehouseSettleClientId}</if>
+            <if test="warehouseSettleCategory != null "> and warehouse_settle_category = #{warehouseSettleCategory}</if>
+            <if test="warehouseSettleUnit != null "> and warehouse_settle_unit = #{warehouseSettleUnit}</if>
+            <if test="warehouseSettleQuantity != null "> and warehouse_settle_quantity = #{warehouseSettleQuantity}</if>
+            <if test="warehouseSettleMoneyKu != null "> and warehouse_settle_money_ku = #{warehouseSettleMoneyKu}</if>
+            <if test="warehouseSettleMoneyShou != null "> and warehouse_settle_money_shou = #{warehouseSettleMoneyShou}</if>
+        </where>
+    </select>
+
+    <select id="selectWarehouseSettleListWName" parameterType="WarehouseSettle" resultMap="WarehouseSettleResultWName">
+        <include refid="selectWarehouseSettleWNameVo"/>
+        <where>
+            <if test="warehouseSettleClientId != null "> and warehouse_settle_client_id = #{warehouseSettleClientId}</if>
+            <if test="warehouseSettleCategory != null "> and warehouse_settle_category = #{warehouseSettleCategory}</if>
+            <if test="warehouseSettleUnit != null "> and warehouse_settle_unit = #{warehouseSettleUnit}</if>
+            <if test="warehouseSettleQuantity != null "> and warehouse_settle_quantity = #{warehouseSettleQuantity}</if>
+            <if test="warehouseSettleMoneyKu != null "> and warehouse_settle_money_ku = #{warehouseSettleMoneyKu}</if>
+            <if test="warehouseSettleMoneyShou != null "> and warehouse_settle_money_shou = #{warehouseSettleMoneyShou}</if>
+        </where>
+    </select>
+    
+    <select id="selectWarehouseSettleByWarehouseSettleId" parameterType="Integer" resultMap="WarehouseSettleResult">
+        <include refid="selectWarehouseSettleVo"/>
+        where warehouse_settle_id = #{warehouseSettleId}
+    </select>
+    <select id="selectWarehouseSettleWNameList" resultMap="WarehouseSettleResultWName">
+        <include refid="selectWarehouseSettleWNameVo"/>
+        <where>
+            <if test="warehouseSettleClientId != null "> and warehouse_settle_client_id = #{warehouseSettleClientId}</if>
+            <if test="warehouseSettleCategory != null "> and warehouse_settle_category = #{warehouseSettleCategory}</if>
+            <if test="warehouseSettleUnit != null "> and warehouse_settle_unit = #{warehouseSettleUnit}</if>
+            <if test="warehouseSettleQuantity != null "> and warehouse_settle_quantity = #{warehouseSettleQuantity}</if>
+            <if test="warehouseSettleMoneyKu != null "> and warehouse_settle_money_ku = #{warehouseSettleMoneyKu}</if>
+            <if test="warehouseSettleMoneyShou != null "> and warehouse_settle_money_shou = #{warehouseSettleMoneyShou}</if>
+        </where>
+    </select>
+
+    <insert id="insertWarehouseSettle" parameterType="WarehouseSettle" useGeneratedKeys="true" keyProperty="warehouseSettleId">
+        insert into warehouse_settle
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="warehouseSettleClientId != null">warehouse_settle_client_id,</if>
+            <if test="warehouseSettleCategory != null">warehouse_settle_category,</if>
+            <if test="warehouseSettleUnit != null">warehouse_settle_unit,</if>
+            <if test="warehouseSettleQuantity != null">warehouse_settle_quantity,</if>
+            <if test="warehouseSettleMoneyKu != null">warehouse_settle_money_ku,</if>
+            <if test="warehouseSettleMoneyShou != null">warehouse_settle_money_shou,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="warehouseSettleClientId != null">#{warehouseSettleClientId},</if>
+            <if test="warehouseSettleCategory != null">#{warehouseSettleCategory},</if>
+            <if test="warehouseSettleUnit != null">#{warehouseSettleUnit},</if>
+            <if test="warehouseSettleQuantity != null">#{warehouseSettleQuantity},</if>
+            <if test="warehouseSettleMoneyKu != null">#{warehouseSettleMoneyKu},</if>
+            <if test="warehouseSettleMoneyShou != null">#{warehouseSettleMoneyShou},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWarehouseSettle" parameterType="WarehouseSettle">
+        update warehouse_settle
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="warehouseSettleClientId != null">warehouse_settle_client_id = #{warehouseSettleClientId},</if>
+            <if test="warehouseSettleCategory != null">warehouse_settle_category = #{warehouseSettleCategory},</if>
+            <if test="warehouseSettleUnit != null">warehouse_settle_unit = #{warehouseSettleUnit},</if>
+            <if test="warehouseSettleQuantity != null">warehouse_settle_quantity = #{warehouseSettleQuantity},</if>
+            <if test="warehouseSettleMoneyKu != null">warehouse_settle_money_ku = #{warehouseSettleMoneyKu},</if>
+            <if test="warehouseSettleMoneyShou != null">warehouse_settle_money_shou = #{warehouseSettleMoneyShou},</if>
+        </trim>
+        where warehouse_settle_id = #{warehouseSettleId}
+    </update>
+
+    <delete id="deleteWarehouseSettleByWarehouseSettleId" parameterType="Integer">
+        delete from warehouse_settle where warehouse_settle_id = #{warehouseSettleId}
+    </delete>
+
+    <delete id="deleteWarehouseSettleByWarehouseSettleIds" parameterType="String">
+        delete from warehouse_settle where warehouse_settle_id in 
+        <foreach item="warehouseSettleId" collection="array" open="(" separator="," close=")">
+            #{warehouseSettleId}
+        </foreach>
+    </delete>
+</mapper>

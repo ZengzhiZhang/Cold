@@ -38,7 +38,7 @@ public class WarehouseOutController extends BaseController
     @Autowired
     private IWarehouseOutService warehouseOutService;
 
-    @PreAuthorize("@ss.hasPermi('cold:warehouse_in:list')")
+    @PreAuthorize("@ss.hasPermi('cold:warehouse_out:list')")
     @GetMapping("/listWName")
     public TableDataInfo listWName(WarehouseOut warehouseOut)
     {
@@ -89,6 +89,7 @@ public class WarehouseOutController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody WarehouseOut warehouseOut)
     {
+
         return toAjax(warehouseOutService.insertWarehouseOut(warehouseOut));
     }
 

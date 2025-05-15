@@ -35,7 +35,6 @@ public class WarehouseStatusController extends BaseController
 {
     @Autowired
     private IWarehouseStatusService warehouseStatusService;
-
     /**
      * 查询库存信息列表
      */

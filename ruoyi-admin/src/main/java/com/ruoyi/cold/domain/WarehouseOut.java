@@ -36,6 +36,8 @@ public class WarehouseOut extends BaseEntity
     @Excel(name = "数量")
     private Double warehouseOutQuantity;
 
+    @Excel(name = "单位")
+    private String warehouseOutUnit;
     /** 出货时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "出货时间", width = 30, dateFormat = "yyyy-MM-dd")
@@ -45,9 +47,14 @@ public class WarehouseOut extends BaseEntity
     @Excel(name = "金额")
     private Double warehouseOutMoney;
 
+
+
     /** 收款方式 */
     @Excel(name = "收款方式")
     private Integer warehouseOutManner;
+
+    @Excel(name = "结算标识")
+    private Integer warehouseOutSettle;
 
     public void setWarehouseOutId(Integer warehouseOutId) 
     {
@@ -99,6 +106,11 @@ public class WarehouseOut extends BaseEntity
         return warehouseOutQuantity;
     }
 
+
+    public void setWarehouseOutUnit(String warehouseOutUnit) {this.warehouseOutUnit = warehouseOutUnit;}
+
+    public String getWarehouseOutUnit () {return warehouseOutUnit;}
+
     public void setWarehouseOutTime(Date warehouseOutTime) 
     {
         this.warehouseOutTime = warehouseOutTime;
@@ -129,6 +141,12 @@ public class WarehouseOut extends BaseEntity
         return warehouseOutManner;
     }
 
+    public void setWarehouseOutSettle(Integer warehouseOutSettle) {this.warehouseOutSettle = warehouseOutSettle;}
+
+    public Integer getWarehouseOutSettle() {
+        return warehouseOutSettle;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -137,9 +155,11 @@ public class WarehouseOut extends BaseEntity
             .append("warehouseOutCategory", getWarehouseOutCategory())
             .append("warehouseOutNumber", getWarehouseOutNumber())
             .append("warehouseOutQuantity", getWarehouseOutQuantity())
+                .append("warehouseOutUnit", getWarehouseOutUnit())
             .append("warehouseOutTime", getWarehouseOutTime())
             .append("warehouseOutMoney", getWarehouseOutMoney())
             .append("warehouseOutManner", getWarehouseOutManner())
+                .append("warehouseOutSettle", getWarehouseOutSettle())
             .toString();
     }
 }

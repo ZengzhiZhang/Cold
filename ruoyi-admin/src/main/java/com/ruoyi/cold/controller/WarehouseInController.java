@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.cold.domain.WarehouseInWName;
 import com.ruoyi.cold.service.IClientInfoService;
+import com.ruoyi.cold.service.IWarehouseStatusService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,8 @@ public class WarehouseInController extends BaseController
     @Autowired
     private IWarehouseInService warehouseInService;
 
+
+    private IWarehouseStatusService warehouseStatusService;
 
     @PreAuthorize("@ss.hasPermi('cold:warehouse_in:list')")
     @GetMapping("/listWName")
@@ -91,13 +94,15 @@ public class WarehouseInController extends BaseController
     public AjaxResult add(@RequestBody WarehouseIn warehouseIn)
     {
         int i = warehouseInService.insertWarehouseIn(warehouseIn);
+        //更新库存状态
+//        warehouseStatusService.se
+
         if(warehouseIn.getWarehouseInFinish() == 1) {
             //更新当前客户的所有未完成的入库为完成状态
             List<Integer> warehouseInIds = warehouseInService.selectUnfinishByClientId(warehouseIn);
-            if(warehouseInIds.size() > 0) {
+            if(!warehouseInIds.isEmpty()) {
                 int update = warehouseInService.updateWarehouseInFinishByIds(warehouseInIds);
             }
-
         }
         return toAjax(i);
     }
