@@ -15,6 +15,8 @@ import com.ruoyi.cold.domain.WarehouseOutWName;
  */
 public interface IWarehouseOutService 
 {
+
+
     /**
      * 查询出库
      * 
@@ -39,6 +41,13 @@ public interface IWarehouseOutService
      */
     public int insertWarehouseOut(WarehouseOut warehouseOut);
 
+    /**
+     * 批量修改出库为已结算
+     *
+     * @param warehouseOutIds 出库
+     * @return 结果
+     */
+    public int batchUpdateWarehouseOut2Settle(List<Integer> warehouseOutIds);
     /**
      * 修改出库
      * 

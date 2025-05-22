@@ -126,6 +126,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{warehouseInId}
         </foreach>
     </update>
+    <update id="batchUpdateWarehouseIn2Settle">
+        update warehouse_in set warehouse_in_settle = 1 where warehouse_in_id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
 
     <delete id="deleteWarehouseInByWarehouseInId" parameterType="Integer">
         delete from warehouse_in where warehouse_in_id = #{warehouseInId}

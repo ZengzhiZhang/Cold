@@ -109,4 +109,9 @@ public class WarehouseInServiceImpl implements IWarehouseInService
     public int updateWarehouseInFinishByIds(List<Integer> warehouseInIds) {
         return warehouseInMapper.updateWarehouseInFinishByIds(warehouseInIds);
     }
+
+    @Override
+    public int batchUpdateWarehouseIn2Settle(List<Integer> inIds) {
+        return warehouseInMapper.batchUpdateWarehouseIn2Settle(inIds);
+    }
 }

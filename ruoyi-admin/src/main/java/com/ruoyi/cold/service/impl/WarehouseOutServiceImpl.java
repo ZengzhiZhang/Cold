@@ -19,7 +19,7 @@ import com.ruoyi.cold.service.IWarehouseOutService;
  * @date 2025-05-13
  */
 @Service
-public class WarehouseOutServiceImpl implements IWarehouseOutService 
+public class WarehouseOutServiceImpl implements IWarehouseOutService
 {
     @Autowired
     private WarehouseOutMapper warehouseOutMapper;
@@ -58,6 +58,12 @@ public class WarehouseOutServiceImpl implements IWarehouseOutService
     public int insertWarehouseOut(WarehouseOut warehouseOut)
     {
         return warehouseOutMapper.insertWarehouseOut(warehouseOut);
+    }
+
+    @Override
+    public int batchUpdateWarehouseOut2Settle(List<Integer> warehouseOutIds) {
+        int i = warehouseOutMapper.batchUpdateOut2Settle(warehouseOutIds);
+        return i;
     }
 
     /**

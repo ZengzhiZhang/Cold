@@ -66,4 +66,6 @@ public interface IWarehouseInService
     public int deleteWarehouseInByWarehouseInId(Integer warehouseInId);
 
     int updateWarehouseInFinishByIds(List<Integer> warehouseInIds);
+
+    int batchUpdateWarehouseIn2Settle(List<Integer> outIds);
 }

@@ -64,4 +64,6 @@ public interface WarehouseOutMapper
      * @return 结果
      */
     public int deleteWarehouseOutByWarehouseOutIds(Integer[] warehouseOutIds);
+
+    int batchUpdateOut2Settle(List<Integer> warehouseOutIds);
 }

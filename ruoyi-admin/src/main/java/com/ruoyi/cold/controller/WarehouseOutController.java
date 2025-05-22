@@ -1,6 +1,8 @@
 package com.ruoyi.cold.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.cold.domain.WarehouseIn;
@@ -37,6 +39,7 @@ public class WarehouseOutController extends BaseController
 {
     @Autowired
     private IWarehouseOutService warehouseOutService;
+
 
     @PreAuthorize("@ss.hasPermi('cold:warehouse_out:list')")
     @GetMapping("/listWName")

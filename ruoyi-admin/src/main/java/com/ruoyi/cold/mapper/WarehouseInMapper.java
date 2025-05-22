@@ -65,4 +65,6 @@ public interface WarehouseInMapper
     List<Integer> selectUnfinishByClientId(WarehouseIn warehouseIn);
 
     int updateWarehouseInFinishByIds(List<Integer> warehouseInIds);
+
+    int batchUpdateWarehouseIn2Settle(List<Integer> inIds);
 }
